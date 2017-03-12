@@ -79,32 +79,32 @@
         </div>
         <div id="test2" class="col s12">
           <div class="row">
-            <form class="col s12" autocomplete="off" action="proses_daftar" method="post">
+            <form class="col s12" autocomplete="off" action="proses/proses_daftar.php" method="post">
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="username" type="text" value="" autocomplete="new-password">
+                  <input id="username" name="username" type="text" value="" autocomplete="new-password">
                   <label for="email">Username</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="password" type="password" value="" autocomplete="new-password">
+                  <input id="password" name="password" type="password" value="" autocomplete="new-password">
                   <label for="password">Password</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="email" type="email" class="validate">
+                  <input id="email" name="email" type="email" class="validate">
                   <label for="email">Email</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <select>
+                  <select name="komunitas">
                     <option value="" disabled selected>Choose your Community</option>
-                    <option value="1">Riders</option>
-                    <option value="2">Sports</option>
-                    <option value="3">Gamers</option>
+                    <option value="Riders">Riders</option>
+                    <option value="Sport">Sports</option>
+                    <option value="Gamers">Gamers</option>
                   </select>
                   <label>Your Community</label>
                 </div>
