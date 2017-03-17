@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(isset($_SESSION['session_user'])){
+  $user = $_SESSION['session_user'];
+  $email = $_SESSION['session_email'];
+  $role = $_SESSION['session_role'];
+}
+?>
 <html>
 <head>
   <link href="css/materialize.css" rel="stylesheet">
@@ -30,7 +38,22 @@
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Forum</a></li>
           <li><a href="#">About us</a></li>
-          <li class="active "><a href="#modalLogin">Log in</a></li>
+          <?php
+          if(isset($user)){
+            if($role<3){
+              echo "<li class='ctive '><a href='dashboard/hi_index.php'>".$user." ( ".$email." )</a></li>";
+              echo "<li class='active '><a href='proses/proses_logOut.php'>Log Out</a></li>";
+            }else{
+              ?>
+              <li class="active "><a href="dashboard/"><?php echo $user." ( ".$email." )"; ?></a></li>
+              <li class="active "><a href="proses/proses_logOut.php">Log Out</a></li>
+              <?php
+            }}else{
+            ?>
+            <li class="active "><a href="#modalLogin">Log in</a></li>
+            <?php
+          }
+          ?>
         </ul>
       </div>
       <div style="padding:100px;">
