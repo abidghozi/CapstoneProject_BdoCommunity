@@ -46,8 +46,13 @@ if($role == 1){
             <ul style="width:240px; margin-top:65px;" class="side-nav fixed indigo lighten-1">
                 <a href="#" class="indigo accent-1">User Info</a></li>
                 <a href="hi_dataartikel.php">Data Artikel</a></li>
-                <a href="hi_dataartikel.php">Data User Komunitas</a></li>
+                <a href="hi_datauserkomunitas.php">Data User Komunitas</a></li>
                 <a href="hi_dataevent.php">Event</a></li>
+                <?php
+                if($role==1){
+                  echo "<a href='hi_dataadminkomunitas.php'>Data Admin Komunitas</a></li>";
+                }
+                ?>
             </ul>
         </header>
 

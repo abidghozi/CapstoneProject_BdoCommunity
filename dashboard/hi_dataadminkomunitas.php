@@ -44,9 +44,15 @@ if($role == 1){
 
     <header class="col s2">
       <ul style="width:240px; margin-top:65px;" class="side-nav fixed indigo lighten-1">
-        <a href="index.php">User Info</a></li>
-        <a href="datakomentar.php">Data Komentar</a></li>
-        <a href="#" class="indigo accent-1">Event</a></li>
+        <a href="hi_index.php">User Info</a></li>
+        <a href="hi_dataartikel.php">Data Artikel</a></li>
+        <a href="hi_datauserkomunitas">Data User Komunitas</a></li>
+        <a href="hi_dataevent.php">Event</a></li>
+        <?php
+        if($role==1){
+          echo "<a href='#' class='indigo accent-1'>Data Admin Komunitas</a></li>";
+        }
+        ?>
       </ul>
     </header>
 
@@ -59,7 +65,7 @@ if($role == 1){
           <br><br>
           <div class="row center">
             <h5 class="header col s12 light">
-              Data Event
+              Selamat Datang
 
             </h5>
           </div>
@@ -68,11 +74,13 @@ if($role == 1){
             <div class="col s12">
               <div class="card-panel teal lighten-2 s12 white-text" style="padding:20px;">
                 <table class="teal lighten-5 highlight striped">
+                  Data Admin Komunitas<hr>
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Event</th>
-                      <th>Lokasi, Tanggal</th>
+                      <th>Nama</th>
+                      <th>Email</th>
+                      <th>Nama Komunitas</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -80,25 +88,27 @@ if($role == 1){
                   <tbody>
                     <tr>
                       <td>1</td>
-                      <td>YCTA (Youth Collaboration Towards Action) 2017, Climate Change</td>
-                      <td>Jakarta, 12 Februari 2016</td>
-                      <td><a href="#">Keluar Event</a></td>
+                      <td>adminAbid</td>
+                      <td>adminAbid@gmail.com</td>
+                      <td>Riders</td>
+                      <td><a href="#">Pengaturan Admin</a></td>
                     </tr>
                     <tr>
                       <td>2</td>
-                      <td>Workshop Kreatif, Make Your Own Flappybird with Diginusa</td>
-                      <td>Bandung, 21 Maret 2016</td>
-                      <td><a href="#">Keluar Event</a></td>
+                      <td>adminIlham</td>
+                      <td>adminIlham@gmail.com</td>
+                      <td>Sport</td>
+                      <td><a href="#">Pengaturan Admin</a></td>
                     </tr>
                     <tr>
                       <td>3</td>
-                      <td>Pameran IKATeCUT 2017</td>
-                      <td>Jakarta, 9 September 2016</td>
-                      <td><a href="#">Keluar Event</a></td>
+                      <td>adminAndhy</td>
+                      <td>adminAndhy@gmail.com</td>
+                      <td>Art</td>
+                      <td><a href="#">Pengaturan Admin</a></td>
                     </tr>
                   </tbody>
                 </table>
-
               </div>
             </div>
 
