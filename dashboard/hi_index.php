@@ -1,9 +1,13 @@
 <?php
 include("../proses/proses_cekSession.php");
+include('../proses/proses_koneksi.php');
 if($role == 1){
   $r = "Super Admin";
 }else if($role == 2){
   $r = "Admin Komunitas";
+  $query = "SELECT dataKomunitas FROM data_komunitas WHERE idKomunitas = '$komunitas'";
+  $result = mysqli_query($conn, $query);
+  if($result){$row = mysqli_fetch_array($result);}else{echo "Things go Wrong";}
 }else{
   $r = "User";
 }
@@ -86,7 +90,7 @@ if($role == 1){
                                 <div class="col s6">
                                     <div class="collection">
                                         <a href="#!" class="collection-item">Level Account : <span class="badge"><?php echo $r; ?></span></a>
-                                        <a href="#!" class="collection-item">Komunitas User : <span class="badge"><?php echo $komunitas; ?></span></a>
+                                        <a href="#!" class="collection-item">Komunitas User : <span class="badge"><?php if($role == 2){echo $row[0];}else{echo $komunitas;} ?></span></a>
                                     </div>
                                 </div>
                             </div>
