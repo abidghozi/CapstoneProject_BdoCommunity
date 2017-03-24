@@ -1,12 +1,11 @@
 <?php
 include("../proses/proses_cekSession.php");
 include("../proses/proses_koneksi.php");
-if($role == 1){
-  $r = "Super Admin";
-  $query = "SELECT * FROM table_user WHERE role = 2";
+if($role == 1 || $role == 2){
+  $editUser = $_GET['user'];
+  $query = "SELECT * FROM table_user WHERE username = '$editUser'";
   $result = mysqli_query($conn,$query);
-}else if($role == 2){
-  $r = "Admin Komunitas";
+  $row = mysqli_fetch_array($result);
 }else{
   header('Location: ../index.php');
 }
@@ -49,11 +48,11 @@ if($role == 1){
       <ul style="width:240px; margin-top:65px;" class="side-nav fixed indigo lighten-1">
         <a href="hi_index.php">User Info</a></li>
         <a href="hi_dataartikel.php">Data Artikel</a></li>
-        <a href="hi_datauserkomunitas.php">Data User Komunitas</a></li>
+        <a href="hi_datauserkomunitas.php" class="indigo accent-1">Data User Komunitas</a></li>
         <a href="hi_dataevent.php">Event</a></li>
         <?php
         if($role==1){
-          echo "<a href='#' class='indigo accent-1'>Data Admin Komunitas</a></li>";
+          echo "<a href='hi_dataadminkomunitas.php'>Data Admin Komunitas</a></li>";
         }
         ?>
       </ul>
@@ -68,38 +67,38 @@ if($role == 1){
           <br><br>
           <div class="row center">
             <h5 class="header col s12 light">
-              Selamat Datang
+
 
             </h5>
           </div>
 
           <div class="row">
             <div class="col s12">
-              <div class="card-panel teal lighten-2 s12 white-text" style="padding:20px;">
-                <table class="teal lighten-5 highlight striped">
-                  Data Admin Komunitas<hr>
-                  <thead>
-                    <tr>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Komunitas</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr>
-                      <?php while($row = mysqli_fetch_array($result)){?>
-                      <tr>
-                        <td><?php echo $row[0]; ?></td>
-                        <td><?php echo $row[2]; ?></td>
-                        <td><?php echo $row[3]; ?></td>
-                        <td></td>
-                      </tr>
-                      <?php } ?>
-                    </tr>
-                  </tbody>
-                  <a href = "hi_daftaradmin.php"><button>Tambah Admin</button></a>
+              <div class="card-panel teal accent-1 s12" style="padding:20px;">
+                <table class="teal accent-1 highlight striped">
+                  Edit User<hr>
+                  <div id="test2" class="col s12">
+                    <div class="row">
+                      <form class="col s12" autocomplete="off" action=" ../proses/proses_editUser.php" method="post">
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input id="username"  name="username" disabled="true" type="text" value="<?php echo $row[0]; ?>" autocomplete="new-password">
+                              <input id="username"  name="username" hidden="true" type="text" value="<?php echo $row[0]; ?>" autocomplete="new-password">
+                            <label for="username">Username</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input id="email" name="email" type="email" value="<?php echo $row[2]; ?>" class="validate">
+                            <label for="email">Email</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="right col s12">
+                            <input type="submit" class="right waves-light btn">
+                          </div>
+                        </div>
+                      </form>
                 </table>
               </div>
             </div>

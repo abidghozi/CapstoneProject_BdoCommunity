@@ -1,11 +1,17 @@
 <?php
 include("../proses/proses_cekSession.php");
+include("../proses/proses_koneksi.php");
 if($role == 1){
   $r = "Super Admin";
+  $query = "SELECT * FROM table_user WHERE role = 3";
+  $result = mysqli_query($conn,$query);
 }else if($role == 2){
   $r = "Admin Komunitas";
+  $query = "SELECT * FROM table_user WHERE idKomunitas = '$komunitas' AND role = 3";
+  $result = mysqli_query($conn,$query);
+
 }else{
-  $r = "User";
+  header('Location: ../index.php');
 }
 ?>
 <html>
@@ -77,32 +83,22 @@ if($role == 1){
                   Data User Komunitas, <?php echo $komunitas; ?><hr>
                   <thead>
                     <tr>
-                      <th>No</th>
-                      <th>Nama</th>
+                      <th>Username</th>
                       <th>Email</th>
+                      <th>Komunitas</th>
                       <th></th>
                     </tr>
                   </thead>
 
                   <tbody>
+                    <?php while($row = mysqli_fetch_array($result)){?>
                     <tr>
-                      <td>1</td>
-                      <td>Abid</td>
-                      <td>Abid@gmail.com</td>
-                      <td><a href="#">Pengaturan User</a></td>
+                      <td><?php echo $row[0]; ?></td>
+                      <td><?php echo $row[2]; ?></td>
+                      <td><?php echo $row[3]; ?></td>
+                      <td><a href = "hi_editUser.php?user=<?php echo $row[0]; ?>">Edit</a></td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Ilham</td>
-                      <td>Ilham@gmail.com</td>
-                      <td><a href="#">Pengaturan User</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Andhy</td>
-                      <td>Andhy@gmail.com</td>
-                      <td><a href="#">Pengaturan User</a></td>
-                    </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>

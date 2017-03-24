@@ -1,12 +1,19 @@
 <?php
 include("../proses/proses_cekSession.php");
+include("../proses/proses_koneksi.php");
 if($role == 1){
   $r = "Super Admin";
+  $query = "SELECT * FROM data_artikel";
+  $result = mysqli_query($conn,$query);
 }else if($role == 2){
   $r = "Admin Komunitas";
+  $query = "SELECT * FROM data_artikel WHERE creatorArtikel = '$komunitas'";
+  $result = mysqli_query($conn,$query);
 }else{
-  $r = "User";
+  header('Location: ../index.php');
 }
+
+
 ?>
 <html>
 <head>
@@ -77,36 +84,30 @@ if($role == 1){
                   Data Artikel<hr>
                   <thead>
                     <tr>
-                      <th>No</th>
-                      <th>Artikel</th>
-                      <th>Waktu Post</th>
-                      <th>Total Komentar</th>
+                      <th>Id Artikel</th>
+                      <th>Judul Artikel</th>
+                      <th>Data Artikel</th>
+                      <th>Tanggal Post</th>
+                      <th>Status Artikel</th>
+                      <th>Creator</th>
+                      <th>TAG</th>
                       <th></th>
                     </tr>
                   </thead>
 
                   <tbody>
+                    <?php while($row = mysqli_fetch_array($result)){?>
                     <tr>
-                      <td>1</td>
-                      <td>Siapkan superbike 4 silinder, Ducati pragmatis</td>
-                      <td>12 Februari 2016</td>
-                      <td>15 Post</td>
-                      <td><a href="#">Pengaturan Artikel</a></td>
+                      <td><?php echo $row[0]; ?></td>
+                      <td><?php echo $row[1]; ?></td>
+                      <td><?php echo $row[2]; ?></td>
+                      <td><?php echo $row[3]; ?></td>
+                      <td><?php echo $row[4]; ?></td>
+                      <td><?php echo $row[5]; ?></td>
+                      <td><?php echo $row[6]; ?></td>
+                      <td></td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>New Honda CB650F</td>
-                      <td>21 Maret 2016</td>
-                      <td>29 Post</td>
-                      <td><a href="#">Pengaturan Artikel</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Honda rebel siap dirilis</td>
-                      <td>9 September 2016</td>
-                      <td>34 Post</td>
-                      <td><a href="#">Pengaturan Artikel</a></td>
-                    </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
