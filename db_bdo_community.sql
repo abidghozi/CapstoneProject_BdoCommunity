@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.12
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2017 at 04:56 PM
--- Server version: 5.6.25
--- PHP Version: 5.6.11
+-- Generation Time: Mar 24, 2017 at 04:18 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,8 +26,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `data_artikel`
 --
 
-CREATE TABLE IF NOT EXISTS `data_artikel` (
+CREATE TABLE `data_artikel` (
   `idArtikel` varchar(10) NOT NULL,
+  `jdlArtikel` varchar(60) NOT NULL,
   `dtArtikel` text NOT NULL,
   `tglArtikel` varchar(30) NOT NULL,
   `statusArtikel` varchar(30) NOT NULL,
@@ -35,13 +36,21 @@ CREATE TABLE IF NOT EXISTS `data_artikel` (
   `idTag` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `data_artikel`
+--
+
+INSERT INTO `data_artikel` (`idArtikel`, `jdlArtikel`, `dtArtikel`, `tglArtikel`, `statusArtikel`, `creatorArtikel`, `idTag`) VALUES
+('id1', 'jdl1', 'data1', 'tgl1', 'stat1', 'kom1', 'tag1'),
+('id2', 'jdl2', 'data2', 'tgl2', 'stat2', 'kom2', 'tag2');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `data_komunitas`
 --
 
-CREATE TABLE IF NOT EXISTS `data_komunitas` (
+CREATE TABLE `data_komunitas` (
   `idKomunitas` varchar(10) NOT NULL,
   `dataKomunitas` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -61,7 +70,7 @@ INSERT INTO `data_komunitas` (`idKomunitas`, `dataKomunitas`) VALUES
 -- Table structure for table `data_tag`
 --
 
-CREATE TABLE IF NOT EXISTS `data_tag` (
+CREATE TABLE `data_tag` (
   `idTag` varchar(10) NOT NULL,
   `dataTag` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -72,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `data_tag` (
 -- Table structure for table `table_user`
 --
 
-CREATE TABLE IF NOT EXISTS `table_user` (
+CREATE TABLE `table_user` (
   `username` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
   `email` varchar(120) NOT NULL,
@@ -85,8 +94,9 @@ CREATE TABLE IF NOT EXISTS `table_user` (
 --
 
 INSERT INTO `table_user` (`username`, `password`, `email`, `idKomunitas`, `role`) VALUES
-('abid', 'ghozi', 'abid@ghozi.com', 'kom1', 3),
+('abid', 'ghozi', 'ghozi@ghozi.com', 'kom1', 3),
 ('admin', 'admin', 'admin@bdocommunity.com', 'kom1', 2),
+('ilham', 'ilham', 'ilham@gmail.com', 'kom2', 3),
 ('super', 'super', 'super@bdocommunity.com', 'super', 1);
 
 --
