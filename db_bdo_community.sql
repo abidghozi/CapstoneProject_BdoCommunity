@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.4.12
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2017 at 04:18 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Generation Time: Mar 25, 2017 at 04:13 AM
+-- Server version: 5.6.25
+-- PHP Version: 5.6.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `data_artikel`
 --
 
-CREATE TABLE `data_artikel` (
+CREATE TABLE IF NOT EXISTS `data_artikel` (
   `idArtikel` varchar(10) NOT NULL,
   `jdlArtikel` varchar(60) NOT NULL,
   `dtArtikel` text NOT NULL,
@@ -50,7 +50,7 @@ INSERT INTO `data_artikel` (`idArtikel`, `jdlArtikel`, `dtArtikel`, `tglArtikel`
 -- Table structure for table `data_komunitas`
 --
 
-CREATE TABLE `data_komunitas` (
+CREATE TABLE IF NOT EXISTS `data_komunitas` (
   `idKomunitas` varchar(10) NOT NULL,
   `dataKomunitas` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -70,7 +70,7 @@ INSERT INTO `data_komunitas` (`idKomunitas`, `dataKomunitas`) VALUES
 -- Table structure for table `data_tag`
 --
 
-CREATE TABLE `data_tag` (
+CREATE TABLE IF NOT EXISTS `data_tag` (
   `idTag` varchar(10) NOT NULL,
   `dataTag` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -81,7 +81,7 @@ CREATE TABLE `data_tag` (
 -- Table structure for table `table_user`
 --
 
-CREATE TABLE `table_user` (
+CREATE TABLE IF NOT EXISTS `table_user` (
   `username` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
   `email` varchar(120) NOT NULL,
