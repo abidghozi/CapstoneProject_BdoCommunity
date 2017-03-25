@@ -22,6 +22,34 @@ if($role == 1 || $role == 2){
     margin-left: 200px;
     padding-left: 200px;
   }
+  /* label color */
+   .input-field label {
+     color: #FFF;
+   }
+   /* label focus color */
+     .input-field input[type=text]:focus + label {
+       color: #FFF;
+     }
+     /* label underline focus color */
+     .input-field input[type=text]:focus {
+       border-bottom: 1px solid #FFF;
+       box-shadow: 0 1px 0 0 #FFF;
+     }
+     /* valid color */
+     .input-field input[type=text].valid {
+       border-bottom: 1px solid #FFF;
+       box-shadow: 0 1px 0 0 #FFF;
+     }
+     /* invalid color */
+     .input-field input[type=text].invalid {
+       border-bottom: 1px solid #FFF;
+       box-shadow: 0 1px 0 0 #FFF;
+     }
+     /* icon prefix focus color */
+     .input-field .prefix.active {
+       color: #FFF;
+     }
+
   </style>
 </head>
 <body>
@@ -74,8 +102,8 @@ if($role == 1 || $role == 2){
 
           <div class="row">
             <div class="col s12">
-              <div class="card-panel teal accent-1 s12" style="padding:20px;">
-                <table class="teal accent-1 highlight striped">
+              <div class="card-panel green darken-3 s12 white-text" style="padding:20px;">
+                <table class="highlight striped">
                   Edit User<hr>
                   <div id="test2" class="col s12">
                     <div class="row">

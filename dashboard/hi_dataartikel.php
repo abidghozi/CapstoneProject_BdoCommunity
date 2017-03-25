@@ -79,7 +79,7 @@ if($role == 1){
 
           <div class="row">
             <div class="col s12">
-              <div class="card-panel teal lighten-2 s12 white-text" style="padding:20px;">
+              <div class="card-panel orange lighten-2 s12 white-text" style="padding:20px;">
                 <table class="teal lighten-5 highlight striped">
                   Data Artikel<hr>
                   <thead>
@@ -110,6 +110,9 @@ if($role == 1){
                     <?php } ?>
                   </tbody>
                 </table>
+                <hr><br>
+                <a href="hi_newartikel.php"><div class="right waves-light btn">Buat Artikel Baru</div></a><br><br>
+                <hr>
               </div>
             </div>
 

@@ -35,6 +35,33 @@ if($role == 1){
     margin-left: 200px;
     padding-left: 200px;
   }
+  /* label color */
+  .input-field label {
+    color: #FFF;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #FFF;
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #FFF;
+    box-shadow: 0 1px 0 0 #FFF;
+  }
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid #FFF;
+    box-shadow: 0 1px 0 0 #FFF;
+  }
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: 1px solid #FFF;
+    box-shadow: 0 1px 0 0 #FFF;
+  }
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #FFF;
+  }
   </style>
 
 </head>
@@ -88,13 +115,13 @@ if($role == 1){
 
           <div class="row">
             <div class="col s12">
-              <div class="card-panel teal accent-1 s12" style="padding:20px;">
+              <div class="card-panel deep-purple lighten-1 s12 white-text" style="padding:20px;">
                 <table class="teal accent-1 highlight striped">
                   Tambah Admin<hr>
 
                   <div id="test2" class="col s12">
                     <div class="row">
-                      <form class="col s12" autocomplete="off" action="../proses/proses_tambahAdmin.php" method="get">
+                      <form class="col s12" autocomplete="off" action="../proses/proses_tambahAdmin.php" method="post">
                         <div class="row">
                           <div class="input-field col s12">
                             <input id="username" name="username" type="text" value="" autocomplete="new-password">
@@ -115,7 +142,7 @@ if($role == 1){
                         </div>
                         <div class="row">
                           <div class="input-field col s12">
-                            <select name="komunitas">
+                            <select id="komunitas" name="komunitas" onchange="selectFunc()">
                               <option value="" disabled selected>Choose your Community</option>
                               <?php
                               while($row = mysqli_fetch_array($result)){
@@ -126,12 +153,14 @@ if($role == 1){
                               ?>
                             </select>
                             <label>Your Community</label>
-                            <select name="mobil">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
-</select>
+                            <input id="komunitashidden" type="text" name="komunitashidden" hidden="true">
+                            <script>
+                            function selectFunc(){
+                              var x = document.getElementById("komunitas").value;
+                              var hidden = document.getElementById("komunitashidden");
+                              hidden.value = x;
+                            }
+                            </script>
                           </div>
                         </div>
                         <div class="row">
@@ -143,15 +172,15 @@ if($role == 1){
                     </div>
                   </div>
 
+                </div>
+
+
+              </div>
+            </div>
+
           </div>
 
-
         </div>
-      </div>
 
-    </div>
-
-  </div>
-
-</body>
-</html>
+      </body>
+      </html>
