@@ -26,12 +26,18 @@ $dtArtikel = $_POST['editor1'];
 $tglArtikel = date("Y/m/d/h:i:s");
 $statusArtikel = "WAITING"; //ADA 3 Status WAITING PUBLISHED REVOKED
 $creatorArtikel = $komunitas;
+$idTag = strtoupper($idTag);
 
-echo $id."<br>";
-echo $jdlArtikel."<br>";
-echo $dtArtikel."<br>";
-echo $tglArtikel."<br>";
-echo $statusArtikel."<br>";
-echo $creatorArtikel."<br>";
-echo $idTag."<br>";
+$query = "INSERT INTO data_artikel VALUES('$id','$jdlArtikel','$dtArtikel','$tglArtikel','$statusArtikel','$creatorArtikel','$idTag')";
+$result = mysqli_query($conn, $query)or die(mysql_error($conn));
+
+if($result){
+  echo "<script>window.location.href='../dashboard/hi_showartikel.php?idArtikel=".$id."';</script>";
+
+}else{
+  echo "<script>alert('Gagal Input Artikel');
+  window.location.href='../dashboard/hi_dataartikel.php';
+  </script>";
+}
+
 ?>
