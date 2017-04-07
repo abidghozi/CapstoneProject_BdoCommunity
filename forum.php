@@ -1,146 +1,189 @@
-
+<?php
+session_start();
+include('proses/proses_koneksi.php');
+if(isset($_SESSION['session_user'])){
+  $user = $_SESSION['session_user'];
+  $email = $_SESSION['session_email'];
+  $role = $_SESSION['session_role'];
+}else{
+  $query = "SELECT * FROM data_komunitas";
+  $result = mysqli_query($conn, $query)or die(mysql_error($conn));
+}
+$query_artikel = "SELECT * FROM data_artikel WHERE statusArtikel = 'PUBLISHED'";
+$result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
+?>
 <html>
-    <head>
-        <title>BDO - Dashboard</title>
-        <!--Import Google Icon Font-->
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<head>
+  <link href="css/materialize.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/styles_forum.css" rel="stylesheet">
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/masonry.pkgd.min.js"></script>
+  <script>
+  $('.cards').masonry({
+    columnWidth: 200,
+    itemSelector: '.col'
+  });
+  </script>
+  <script>
+  $(document).ready(function () {
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modalLogin').modal();
+  });
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+  </script>
+  <style>
+  #view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+  }
+  </style>
+</head>
+<body class="mdl-forum">
+  <nav class="color-primary">
 
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+      <a href="#" class="brand-logo">BDO Community Forum</a>
 
-    <body>
-        <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script>
+  </nav>
+  <div class="tab-bar  color-primary--dark">
+    <a href="index.php" class="layout__tab">Home</a>
+    <a href="#overview" class="layout__tab is-active">Forum</a>
+    <a href="#features" class="layout__tab">About Us</a>
+    <?php
+    if(isset($user)){
+      if($role<3){
+        echo "<a class='layout__tab' href='dashboard/hi_index.php'>".$user." ( ".$email." )</a>";
+        echo "<a class='layout__tab' href='proses/proses_logOut.php'>Log Out</a>";
+      }else{
+        ?>
+        <a class="layout__tab" href="dashboard/"><?php echo $user." ( ".$email." )"; ?></a>
+        <a class="layout__tab" href="proses/proses_logOut.php">Log Out</a>
+        <?php
+      }}else{
+        ?>
+        <a class="layout__tab" href="#modalLogin">Log in</a>
+        <?php
+      }
+      ?>
+  </div>
 
-
-        </script>
-
-        <!-- Page Layout here -->
-
-        <!-- Nav Bar -->
-        <div class="navbar-fixed">
-            <nav >
-                <div class="nav-wrapper" >
-                    <a href="#" class="brand-logo" style="margin-left:25px;">BDO COMMUNITY</a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-
-                        <li>Hai, &nbsp;&nbsp;&nbsp;</li>
-                        <li><a href="redirect_index">Home</a></li>
-                        <li><a href="redirect_forum">Forum</a></li>
-                        <li><a class="waves-effect waves-light btn" href="redirect_logout">Logout</a></li>
-
-                    </ul>
-                </div>
-            </nav>
+  <!-- Login Modal Structure -->
+  <div id="modalLogin" class="modal modalLogin" style="width:35%;">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs z-depth-5">
+            <li class="tab col s6"><a class="active" href="#test1">Log In</a></li>
+            <li class="tab col s6"><a href="#test2">Sign In</a></li>
+          </ul>
         </div>
+        <div id="test1" class="col s12">
+          <div class="row">
+            <form class="col s12" autocomplete="off" action="proses/proses_login.php" method="post">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="username" name="username" type="text" value="" autocomplete="new-password">
+                  <label for="email">Username</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="password" name="password" type="password" class="validate" value="" autocomplete="new-password">
+                  <label for="password">Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="right col s12">
+                  <input type="submit" class="right waves-light btn">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="test2" class="col s12">
+          <div class="row">
+            <form class="col s12" autocomplete="off" action="proses/proses_daftar.php" method="post">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="username" name="username" type="text" value="" autocomplete="new-password">
+                  <label for="email">Username</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="password" name="password" type="password" value="" autocomplete="new-password">
+                  <label for="password">Password</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="email" name="email" type="email" class="validate">
+                  <label for="email">Email</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <select name="komunitas">
+                    <option value="" disabled selected>Choose your Community</option>
+                    <?php
+                    while($row = mysqli_fetch_array($result)){
+                      ?>
+                      <option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+                      <?php
+                    }
+                    ?>
+                  </select>
+                  <label>Your Community</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="right col s12">
+                  <input type="submit" class="right waves-light btn">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="row">
-            <!-- Empty space -->
+  <div class="container">
+    <main class="mdl-layout__content">
+      <div class="mdl-layout__tab-panel is-active" id="overview">
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 
-            <header class="col s2">
-                <ul style="width:240px; margin-top:65px;" class="side-nav fixed">
-                    <a href="#" class="grey lighten-1">Admin Info</a></li>
-                    <li><a href="redirect_daftarArtikel">Daftar Artikel</a></li>
-                    <li><a href="redirect_newArtikel">Artikel Baru</a></li>
-                    <a href="redirect_daftarPengaduan">Lihat Pengaduan</a></li>
-                </ul>
-            </header>
-
-
-            <div class="col s10 grey lighten-5">
-                <!-- Teal page content  -->
-
-                <div class="section no-pad-bot grey lighten-5" id="index-banner">
-                    <div class="container">
-                        <br><br>
-                        <div class="row center">
-                            <h5 class="header col s12 light">
-                                Admin Dashboard
-
-                            </h5>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s12">
-                            <div class="card-panel teal lighten-2 s12 white-text" style="padding:20px;">
-                                Selamat datang
-                                <hr>
-                                <br>
-                                <div class="row">
-                                    <div class="col s7">
-                                        <div class="collection">
-                                            <a href="#!" class="collection-item">Nama Komunitas : <span class="badge">
-                                                    <%
-                                                        out.print(result.getString(6));
-                                                    %>
-                                                </span></a>
-                                            <a href="#!" class="collection-item">Total Registered Member : <span class="badge">-</span></a>
-                                        </div>
-                                    </div>
-                                    <div class="col s5">
-                                        <div class="collection">
-                                            <a href="#!" class="collection-item">Total Sumbited Article : <span class="badge"></span></a>
-                                            <a href="#!" class="collection-item">Total Pending Article : <span class="badge"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-
-                            <div class="col s12">
-                            <div class="card-panel s12 white-text light-green darken-4">
-                                Informasi Admin
-                                <hr>
-
-                                <div class="row grey lighten-5" style="padding:20px; border-radius: 5px;">
-                                <form class="col s12" action="func_NewAdmin" method="post">
-                                    <div class="row teal-text">
-                                        <div class="input-field col s6">
-                                            <input name="uid" id="uid" type="text" class="hide" value="">
-                                            <input name="uid" id="uid_fake" type="text" disabled value="">
-                                            <label for="uid">UID</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input name="username" id="username" type="text" class="validate" value="">
-                                            <label for="username">Username</label>
-                                        </div>
-                                    </div>
-                                    <div class="row teal-text">
-                                        <div class="input-field col s12">
-                                            <input name="password" id="password" type="password" class="validate" value="">
-                                            <label for="password">Password</label>
-                                        </div>
-                                    </div>
-                                    <div class="row teal-text">
-                                        <div class="input-field col s12">
-                                            <input name="komunitas" id="komunitas" type="text" value="">
-                                            <label for="komunitas">Komunitas</label>
-                                        </div>
-                                    </div>
-                                            <div class="input-field col s12 hide">
-                                                <input name="type" id="komunitas" type="text" value="edit" class="hide">
-                                        </div>
-                                    <input type="submit" value="Perbaharui Data Admin" class="modal-action modal-close waves-effect waves-green indigo btn">
-                                </form>
-                            </div>
-
-                            </div>
-                            </div>
-
-                        </div>
-
-
+        </section>
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+          <div class="row">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-title">Artikel<hr></div>
+                  <?php while($row_artikel = mysqli_fetch_array($result_artikel)){ ?>
+                  <div class="row">
+                    <div class="col s10">
+                      <h5><a href="#"><?php echo $row_artikel[1]; ?></a></h5>
                     </div>
+                  </div>
+                  <?php } ?>
                 </div>
+                <div class="card-action">
+                  1 2 3 4 5 ... Next >
+                </div>
+              </div>
+          </div>
+        </section>
 
-            </div>
-
-        </div>
-
-    </body>
+      </div>
+    </main>
+  </div>
+</body>
 </html>

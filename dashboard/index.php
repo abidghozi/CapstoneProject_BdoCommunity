@@ -35,7 +35,7 @@ if($result){$row = mysqli_fetch_array($result);}else{echo "Things go Wrong";}
 
           <li>Hai, <?php echo $user; ?>&nbsp;</li>
           <li><a href="../">Home</a></li>
-          <li><a href="#">Forum</a></li>
+          <li><a href="../forum.php">Forum</a></li>
           <li><a class="indigo darken-1" href="../proses/proses_logOut.php">Logout</a></li>
 
         </ul>

@@ -40,7 +40,7 @@ if(isset($_SESSION['session_user'])){
         <a href="#" class="brand-logo">Logo</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Forum</a></li>
+          <li><a href="forum.php">Forum</a></li>
           <li><a href="#">About us</a></li>
           <?php
           if(isset($user)){

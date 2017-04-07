@@ -1,5 +1,6 @@
 <?php
 include("../proses/proses_cekSession.php");
+include("../proses/proses_koneksi.php");
 if($role == 1){
   $r = "Super Admin";
 }else if($role == 2){
@@ -7,6 +8,10 @@ if($role == 1){
 }else{
   header('Location: hi_index.php');
 }
+$idA = $_GET['idArtikel'];
+$query = "SELECT * FROM data_artikel WHERE idArtikel = '$idA'";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_array($result);
 ?>
 <html>
 <head>
@@ -15,6 +20,7 @@ if($role == 1){
   <script src="../js/jquery-3.1.1.min.js"></script>
   <script src="../js/materialize.js"></script>
   <script src="../js/masonry.pkgd.min.js"></script>
+  <script src="ckeditor/ckeditor.js"></script>
 
   <style>
   .dashku{
@@ -22,32 +28,32 @@ if($role == 1){
     padding-left: 200px;
   }
   /* label color */
-   .input-field label {
-     color: #000;
-   }
-   /* label focus color */
-     .input-field input[type=text]:focus + label {
-       color: #000;
-     }
-     /* label underline focus color */
-     .input-field input[type=text]:focus {
-       border-bottom: 1px solid #000;
-       box-shadow: 0 1px 0 0 #000;
-     }
-     /* valid color */
-     .input-field input[type=text].valid {
-       border-bottom: 1px solid #000;
-       box-shadow: 0 1px 0 0 #000;
-     }
-     /* invalid color */
-     .input-field input[type=text].invalid {
-       border-bottom: 1px solid #000;
-       box-shadow: 0 1px 0 0 #000;
-     }
-     /* icon prefix focus color */
-     .input-field .prefix.active {
-       color: #000;
-     }
+  .input-field label {
+    color: #000;
+  }
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #000;
+  }
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
+  }
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #000;
+  }
 
   </style>
 </head>
@@ -60,7 +66,7 @@ if($role == 1){
 
           <li>Hai, <?php echo $user; ?>&nbsp;</li>
           <li><a href="../">Home</a></li>
-          <li><a href="#">Forum</a></li>
+          <li><a href="../forum.php">Forum</a></li>
           <li><a class="indigo darken-1" href="../proses/proses_logOut.php">Logout</a></li>
 
         </ul>
@@ -95,7 +101,6 @@ if($role == 1){
           <div class="row center">
             <h5 class="header col s12 light">
               Penyuntingan Artikel
-
             </h5>
           </div>
 
@@ -103,27 +108,42 @@ if($role == 1){
             <div class="col s12">
               <div class="card-panel teal lighten-5 s12" style="padding:20px;">
                 <table class="highlight striped">
-
-                  Judul Artikel
-                  <hr>
-
-                  <br>
-                  <hr>
-                  <button class="right waves-light btn">Verifikasi Artikel</button>
-
-                </table>
-              </div>
-            </div>
-
+                  <form method="post" action="../proses/proses_terbitArtikel.php">
+                      <div class="input-field">
+                        <input type="text" name="idArtikel" value="<?php echo $row[0]; ?>" hidden="true">
+                        <input value="<?php echo $row[1]; ?>" name="judul" id="tag" type="text" class="validate">
+                        <label for="judul">Judul Artikel</label>
+                      </div>
+                    <textarea name="editor1" id="editor1" rows="10" cols="80">
+                      <?php echo $row[2]; ?>
+                    </textarea>
+                    <script>
+                    CKEDITOR.replace( 'editor1' );
+                    </script>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input placeholder="Contoh : #MOTOR #KENDARAAN #FORUMTERBUKA" value="<?php echo $row[6]; ?>" name="tag" id="tag" type="text" class="validate">
+                    <label for="tag">Tag Artikel</label>
+                  </div>
+                </div>
+                <input type="submit" name="submit" class="right waves-light btn" style="margin-left:10px;" value="Simpan & Terbitkan Artikel">
+                <input type="submit" name="submit" class="right waves-light btn" style="margin-left:10px;" value="Simpan Artikel">
+              </form>
+            </table>
           </div>
-
-
         </div>
+
       </div>
 
-    </div>
 
+    </div>
   </div>
+
+</div>
+
+</div>
 
 </body>
 </html>
