@@ -37,7 +37,7 @@ if(isset($_SESSION['session_user'])){
   <nav class="nav-extended transparent">
     <div class="nav-background indigo darken-3 opacity-1" style="background-image: url(//cdn.shopify.com/s/files/1/1775/8583/t/1/assets/icon-seamless.png);">
       <div class="nav-wrapper container">
-        <a href="#" class="brand-logo">Logo</a>
+        <a href="#" class="brand-logo">BDO COMMUNITY</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="forum.php">Forum</a></li>
@@ -61,7 +61,14 @@ if(isset($_SESSION['session_user'])){
           </ul>
         </div>
         <div style="padding:100px;">
-          <h3 class="center-align">This should be center aligned</h3>
+          <div class="center-align">
+            <blockquote>
+              <p>
+                <div style="font-size:150%;">Dream as if you'll live forever</div>
+              <div class="right" style="font-size:100%;">- Some One</div>
+              </p>
+              </blockquote
+          </div>
         </div>
       </div>
       <div class="nav-content indigo darken-4">

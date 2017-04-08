@@ -9,7 +9,7 @@ if(isset($_SESSION['session_user'])){
   $query = "SELECT * FROM data_komunitas";
   $result = mysqli_query($conn, $query)or die(mysql_error($conn));
 }
-$query_artikel = "SELECT * FROM data_artikel WHERE statusArtikel = 'PUBLISHED'";
+$query_artikel = "SELECT * FROM data_artikel WHERE statusArtikel = 'PUBLISHED' ORDER BY idArtikel DESC";
 $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
 ?>
 <html>
@@ -170,7 +170,7 @@ $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
                   <?php while($row_artikel = mysqli_fetch_array($result_artikel)){ ?>
                   <div class="row">
                     <div class="col s10">
-                      <h5><a href="#"><?php echo $row_artikel[1]; ?></a></h5>
+                      <h5><a href="artikel.php?q=<?php echo $row_artikel[0]; ?>"><?php echo $row_artikel[1]; ?></a></h5>
                     </div>
                   </div>
                   <?php } ?>

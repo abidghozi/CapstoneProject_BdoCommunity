@@ -15,8 +15,8 @@ $idTag = "";
 $tag = explode("#",$_POST['tag']);
 $trimmed_tag=array_map('trim',$tag);
 for($x = 1; $x<(sizeof($tag)); $x++ ){
-  if($x!=(sizeof($tag)-1)){$idTag = $idTag.str_replace(' ', '',"# ".$tag[$x].",");}else{
-    $idTag = $idTag.str_replace(' ', '',"# ".$tag[$x]."<br>");;
+  if($x!=(sizeof($tag)-1)){$idTag = $idTag.str_replace(' ', '',"# ".$tag[$x]);}else{
+    $idTag = $idTag.str_replace(' ', '',"# ".$tag[$x]);;
   }
 }
 

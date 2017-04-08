@@ -81,13 +81,15 @@ if($role == 1){
                 <hr>
                 <br>
                 <div class="row">
-                  <div class="col s6">
+                  <div class="col s12">
                     <div class="collection">
                       <a href="#!" class="collection-item">Nama User : <span class="badge"><?php echo $user; ?></span></a>
                       <a href="#!" class="collection-item">Email User : <span class="badge"><?php echo $email; ?></span></a>
                     </div>
                   </div>
-                  <div class="col s6">
+                </div>
+                <div class="row">
+                  <div class="col s12">
                     <div class="collection">
                       <a href="#!" class="collection-item">Level Account : <span class="badge"><?php echo $r; ?></span></a>
                       <a href="#!" class="collection-item">Komunitas User : <span class="badge"><?php if($role == 2){echo $row[0];}else{echo $komunitas;} ?></span></a>

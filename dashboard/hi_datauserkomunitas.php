@@ -80,7 +80,7 @@ if($role == 1){
             <div class="col s12">
               <div class="card-panel teal lighten-2 s12 white-text" style="padding:20px;">
                 <table class="teal lighten-5 highlight striped">
-                  Data User Komunitas, <?php echo $komunitas; ?><hr>
+                  Data User Komunitas, <?php echo $namaKomunitas; ?><hr>
                   <thead>
                     <tr>
                       <th>Username</th>
