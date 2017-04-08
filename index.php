@@ -77,7 +77,6 @@ if(isset($_SESSION['session_user'])){
         </ul>
       </div>
     </nav>
-
     <!-- Login Modal Structure -->
     <div id="modalLogin" class="modal modalLogin" style="width:35%;">
       <div class="modal-content">
