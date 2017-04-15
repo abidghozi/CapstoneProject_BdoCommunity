@@ -9,7 +9,7 @@ if(isset($_SESSION['session_user'])){
   $query = "SELECT * FROM data_komunitas";
   $result = mysqli_query($conn, $query)or die(mysql_error($conn));
 }
-$query_artikel = "SELECT * FROM data_artikel WHERE statusArtikel = 'PUBLISHED' ORDER BY idArtikel DESC LIMIT 12";
+$query_artikel = "SELECT * FROM data_event WHERE status = 'PUBLISHED' ORDER BY id_event DESC LIMIT 12";
 $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
 ?>
 <html>
@@ -50,13 +50,13 @@ $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
 <body class="mdl-forum">
   <nav class="color-primary">
 
-      <a href="#" class="brand-logo">BDO Community Forum</a>
+      <a href="#" class="brand-logo">BDO Community Event</a>
 
   </nav>
   <div class="tab-bar  color-primary--dark">
     <a href="index.php" class="layout__tab">Home</a>
-    <a href="#overview" class="layout__tab is-active">Forum</a>
-    <a href="event.php" class="layout__tab">Event</a>
+    <a href="forum.php" class="layout__tab">Forum</a>
+    <a href="event.php" class="layout__tab is-active">Event</a>
     <?php
     if(isset($user)){
       if($role<3){
@@ -166,14 +166,14 @@ $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
           <div class="row">
               <div class="card">
                 <div class="card-content">
-                  <div class="card-title">Artikel<hr></div>
+                  <div class="card-title">Event<hr></div>
                   <?php
                   $color = ['card-panel deep-purple lighten-5', 'indigo lighten-5',' light-green lighten-5',
                             'orange lighten-5','brown lighten-5','deep-orange lighten-5','red lighten-5'];
                   while($row_artikel = mysqli_fetch_array($result_artikel)){ ?>
                   <div class="row card-panel <?php echo $color[rand(0,5)];  ?>">
-                    <div class="col s10">
-                      <h5><a href="artikel.php?q=<?php echo $row_artikel[0]; ?>"><?php echo $row_artikel[1]; ?></a></h5>
+                    <div class="col s10 ">
+                      <h5><a href="sh_event.php?q=<?php echo $row_artikel[0]; ?>"><?php echo $row_artikel[1].", ".$row_artikel[3]."<br>Tanggal : ".$row_artikel[2]; ?></a></h5>
                     </div>
                   </div>
                   <?php } ?>

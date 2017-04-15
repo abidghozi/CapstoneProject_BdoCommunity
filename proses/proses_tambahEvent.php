@@ -21,7 +21,7 @@ $id = substr($row[0],2);
 $id = $id + 1;
 $id = "id".$id;
 
-$query = "INSERT INTO data_event VALUES('$id','$tema','$tanggal','$nama','$detail','$p_jawab','$k_jawab','$l_event','$creator_event')";
+$query = "INSERT INTO data_event VALUES('$id','$tema','$tanggal','$nama','$detail','$p_jawab','$k_jawab','$l_event','$creator_event','WAITING')";
 $result = mysqli_query($conn, $query)or die(mysql_error($conn));
 
 if($result){

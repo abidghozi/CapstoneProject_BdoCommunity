@@ -10,13 +10,9 @@ if(isset($_SESSION['session_user'])){
   $result = mysqli_query($conn, $query)or die(mysql_error($conn));
 }
 $q = $_GET['q'];
-$query_artikel = "SELECT * FROM data_artikel WHERE idArtikel = '$q'";
+$query_artikel = "SELECT * FROM data_event WHERE id_event = '$q'";
 $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
 $row_artikel = mysqli_fetch_array($result_artikel);
-
-$query_komentar = "SELECT * FROM data_komentar WHERE idArtikel = '$q'";
-$result_komentar = mysqli_query($conn, $query_komentar)or die(mysqli_error($conn));
-$total_komentar = mysqli_num_rows($result_komentar);
 ?>
 <html>
 <head>
@@ -51,6 +47,10 @@ $total_komentar = mysqli_num_rows($result_komentar);
     margin-bottom: 40px;
     z-index: 900;
   }
+  #map {
+    height: 400px;
+    width: 100%;
+  }
   </style>
 </head>
 <body class="mdl-forum">
@@ -61,8 +61,8 @@ $total_komentar = mysqli_num_rows($result_komentar);
   </nav>
   <div class="tab-bar  color-primary--dark">
     <a href="index.php" class="layout__tab">Home</a>
-    <a href="forum.php" class="layout__tab is-active">Forum</a>
-    <a href="event.php" class="layout__tab">Event</a>
+    <a href="forum.php" class="layout__tab">Forum</a>
+    <a href="event.php" class="layout__tab is-active">Event</a>
     <?php
     if(isset($user)){
       if($role<3){
@@ -172,49 +172,52 @@ $total_komentar = mysqli_num_rows($result_komentar);
             <div class="row">
               <div class="card">
                 <div class="card-content">
-                  <div class="card-title"><strong><?php echo $row_artikel[1]; ?></strong><hr></div>
-                  <?php echo $row_artikel[2]; ?>
+                  <div class="card-title"><strong><?php echo $row_artikel[3]; ?></strong><hr></div>
+                  <?php echo $row_artikel[4]; ?>
                 </div>
                 <div class="card-action">
+                  Info Event <hr>
+                  Tema Event : <?php echo $row_artikel[1]; ?><br>
+                  Tanggal : <?php echo $row_artikel[2]; ?><br>
+                  Kontak : <?php echo $row_artikel[5].", ".$row_artikel[6]; ?><br><br>
+                  Lokasi Event <hr>
+                  <div id="map"></div>
+                  <?php
+                  $loc = str_replace(array('(',')'), '',$row_artikel[7]);
+                  $exp_loc = explode(',',$loc);
+                  ?>
+                  <script>
+                  function initMap() {
+                    var bandung = {lat: <?php echo $exp_loc[0]; ?>, lng: <?php echo $exp_loc[1]; ?>};
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                      zoom: 16  ,
+                      center: bandung
+                    });
 
+                    var marker = new google.maps.Marker({
+                      position: bandung,
+                      map: map
+                    });
+                    function placeMarker(position, map) {
+                      marker.setPosition(position);
+                    }
+
+                    google.maps.event.addListener(map, 'click', function(e) {
+                      placeMarker(e.latLng, map);
+                      alert("Lokasi Terpilih Di : "+e.latLng);
+                      document.getElementById("l_event").value=e.latLng;
+                    });
+
+                  }
+                  // google.maps.event.addListener(map, 'click', function(event) {alert(event.latLng);});
+                  </script>
+                  <script async defer
+                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjo2-TMEkJmIvLHhx-TG_QWJUtEVzEwQU&callback=initMap">
+                  </script>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="card">
-                <div class="card-content">
-                  <div class="card-title"><?php echo $total_komentar; ?> Komentar<hr></div>
-                  <?php
-                  error_reporting(0);
-                  if($user === null || $user == '' || $user == ""){
-                    $user = "Anonim";
-                  }
-                  ?>
-                </div>
-                <div class="card-action light-blue lighten-5">
-                  <form method="post" action="proses/proses_insertKomentar.php">
-                    <input type="text" name="id" value="<?php echo $q; ?>" hidden="true">
-                    <input type="text" name="user" value="<?php echo $user; ?>" hidden="true">
-                    <textarea id="komentar" name="komentar" class="materialize-textarea"></textarea>
-                    <label for="komentar">.</label>
-                    <input type="submit" value="Berikan Komentar" class="right waves-light btn">
-                  </form>
-                </div>
-                <?php if($total_komentar=0){ ?>
-                  <div class="card-action">
-                    Tidak Ada Komentar
-                  </div>
-                  <?php }else{
-                    while($row_komentar = mysqli_fetch_array($result_komentar)){ ?>
-                      <div class="card-action">
-                        <?php echo $row_komentar[3]; ?>
-                        <div class="right">Oleh <?php echo $row_komentar[2].", ".$row_komentar[4]; ?></div>
-                      </div>
-                      <?php  }} ?>
-                    </div>
-                  </section>
 
-                </div>
               </main>
             </div>
           </body>

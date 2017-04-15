@@ -9,7 +9,7 @@ if(isset($_SESSION['session_user'])){
   $query = "SELECT * FROM data_komunitas";
   $result = mysqli_query($conn, $query)or die(mysql_error($conn));
 }
-$query_artikel = "SELECT * FROM data_artikel WHERE statusArtikel = 'PUBLISHED' ORDER BY idArtikel DESC LIMIT 9";
+$query_artikel = "SELECT * FROM data_artikel WHERE statusArtikel = 'PUBLISHED' ORDER BY idArtikel DESC LIMIT 12";
 $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
 ?>
 <html>
@@ -43,7 +43,7 @@ $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="forum.php">Forum</a></li>
-          <li><a href="#">About us</a></li>
+          <li><a href="event.php">Event</a></li>
           <?php
           if(isset($user)){
             if($role<3){
@@ -166,22 +166,29 @@ $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
 
           <div class="row">
             <div class ="cards" data-masonry='{"itemSelector": ".col" }'>
-              <div class="col s4">
-                <div class="card indigo darken-1 hoverable">
-                  <div class="card-content white-text">
-                    <span class="card-title">Card Title</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam odio tortor, porttitor nec metus vitae, tincidunt facilisis nibh. Cras gravida eu mi in iaculis. Sed eleifend sapien ut leo semper tempus. Praesent luctus, erat vel pharetra condimentum, lectus magna ullamcorper turpis, vel laoreet leo eros ut diam. Vestibulum mauris odio,
-                    </div>
-                    <div class="card-action">
-                      <a href="#">Baca Lebih Lanjut</a>
+
+              <?php while($row_artikel = mysqli_fetch_array($result_artikel)){ ?>
+                <div class="col s4">
+                  <div class="card indigo darken-1 hoverable">
+                    <div class="card-content white-text">
+                      <span class="card-title"><?php echo $row_artikel[1]; ?></span>
+                      <p>
+                        <?php echo substr(strip_tags($row_artikel[2]),0,210) . " ..."; ?>
+                      </p>
+                      </div>
+                      <div class="card-action">
+                        <a href="artikel.php?q=<?php echo $row_artikel[0]; ?>">Baca Lebih Lanjut</a>
+                      </div>
                     </div>
                   </div>
+                  <?php } ?>
+
                 </div>
-
               </div>
-            </div>
 
+              <br><br><br>
+
+            </div>
           </div>
-        </div>
-      </body>
-      </html>
+        </body>
+        </html>

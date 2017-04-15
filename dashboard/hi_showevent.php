@@ -113,14 +113,16 @@ $row = mysqli_fetch_array($result);
             <div class="col s12">
               <div class="card-panel  deep-purple lighten-1 s12 gray-text" style="padding:20px;">
                 <table class="highlight striped">
-                  <form class="col s12" action="../proses/proses_tambahEvent.php" method="post">
+                  <form class="col s12" action="../proses/proses_terbitEvent.php" method="post">
                     <div class="row">
                       <div class="input-field col s6">
+                        <input type="text" name="idevent" value="<?php echo $row[0]; ?>" hidden="true">
                         <input placeholder="Contoh : BAKSOS, SEMINAR" name="tema" id="tema" type="text" class="validate" value="<?php echo $row[1]; ?>">
                         <label for="tema">Tema Event</label>
                       </div>
                       <div class="input-field col s6">
-                        <input name="tanggal" id="tanggal" type="date" class="datepicker" placeholder="<?php echo $row[2]; ?>" value="<?php echo $row[2]; ?>">
+                        <input name="tanggal_old" hidden="true" type="text" value="<?php echo $row[2]; ?>">
+                        <input name="tanggal" id="tanggal" type="date" class="datepicker" placeholder="<?php echo $row[2]; ?>">
                         <label for="tanggal">Tanggal Event</label>
                         <script>
                         $('.datepicker').pickadate({
@@ -137,7 +139,7 @@ $row = mysqli_fetch_array($result);
                     <div class="row">
                       <div class=" col s12">
                         <textarea name="editor1" id="editor1" rows="10" cols="80">
-                          value="<?php echo $row[4]; ?>"
+                          <?php echo $row[4]; ?>
                         </textarea>
                         <script>
                         // Replace the <textarea id="editor1"> with a CKEditor
