@@ -2,8 +2,12 @@
 include("../proses/proses_cekSession.php");
 if($role == 1){
   $r = "Super Admin";
+  $query = "SELECT * FROM data_event";
+  $result = mysqli_query($conn,$query);
 }else if($role == 2){
   $r = "Admin Komunitas";
+  $query = "SELECT * FROM data_event WHERE creator_event = '$komunitas'";
+  $result = mysqli_query($conn,$query);
 }else{
   $r = "User";
 }
@@ -77,46 +81,37 @@ if($role == 1){
                   Data Event<hr>
                   <thead>
                     <tr>
-                      <th>No</th>
                       <th>Event</th>
-                      <th>Lokasi, Tanggal</th>
+                      <th>Tanggal</th>
                       <th></th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>YCTA (Youth Collaboration Towards Action) 2017, Climate Change</td>
-                      <td>Jakarta, 12 Februari 2016</td>
-                      <td><a href="#">Pengaturan Event</a></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Workshop Kreatif, Make Your Own Flappybird with Diginusa</td>
-                      <td>Bandung, 21 Maret 2016</td>
-                      <td><a href="#">Pengaturan Event</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Pameran IKATeCUT 2017</td>
-                      <td>Jakarta, 9 September 2016</td>
-                      <td><a href="#">Pengaturan Event</a></td>
-                    </tr>
-                  </tbody>
-                </table>
+                    <?php while($row = mysqli_fetch_array($result)){?>
+                      <tr>
+                        <td><?php echo $row[3]; ?></td>
+                        <td><?php echo $row[2]; ?></td>
+                        <td><a href = "hi_showevent.php?id_event=<?php echo $row[0]; ?>">Sunting</a></td>
+                      </tr>
+                      <?php } ?>
+                    </tbody>
+                  </table>
+                  <hr><br>
+                  <a href="hi_newevent.php"><div class="right waves-light btn">Buat Event Baru</div></a><br><br>
+                  <hr>
+                </div>
               </div>
+
             </div>
 
+
           </div>
-
-
         </div>
+
       </div>
 
     </div>
 
-  </div>
-
-</body>
-</html>
+  </body>
+  </html>
