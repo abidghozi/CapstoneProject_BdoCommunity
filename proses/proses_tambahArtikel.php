@@ -3,7 +3,7 @@ include("../proses/proses_cekSession.php");
 include("../proses/proses_koneksi.php");
 
 //GENERATE IDARTIKEL
-$query = "SELECT * FROM data_artikel ORDER BY idArtikel DESC LIMIT 1";
+$query = "SELECT * FROM data_artikel ORDER BY tglArtikel DESC LIMIT 1";
 $result = mysqli_query($conn,$query);
 $row = mysqli_fetch_array($result);
 $id = substr($row[0],2);
