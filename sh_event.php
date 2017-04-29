@@ -9,10 +9,19 @@ if(isset($_SESSION['session_user'])){
   $query = "SELECT * FROM data_komunitas";
   $result = mysqli_query($conn, $query)or die(mysql_error($conn));
 }
+if(!isset($_GET['q'])){
+  echo "<script>alert('Event Tidak Ditemukan');
+  window.location.href='event.php';
+  </script>";
+}
 $q = $_GET['q'];
 $query_artikel = "SELECT * FROM data_event WHERE id_event = '$q'";
-$result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
+$result_artikel = mysqli_query($conn, $query_artikel)or die(mysqli_error($conn));
 $row_artikel = mysqli_fetch_array($result_artikel);
+
+$query_follower = "SELECT * FROM data_event_follower WHERE id_event = '$q'";
+$result_follower = mysqli_query($conn, $query_follower)or die(mysqli_error($conn));
+$num_follower = mysqli_num_rows($result_follower);
 ?>
 <html>
 <head>
@@ -63,6 +72,7 @@ $row_artikel = mysqli_fetch_array($result_artikel);
     <a href="index.php" class="layout__tab">Home</a>
     <a href="forum.php" class="layout__tab">Forum</a>
     <a href="event.php" class="layout__tab is-active">Event</a>
+    <a href="chat.php" class="layout__tab">Chat</a>
     <?php
     if(isset($user)){
       if($role<3){
@@ -214,6 +224,30 @@ $row_artikel = mysqli_fetch_array($result_artikel);
                   <script async defer
                   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjo2-TMEkJmIvLHhx-TG_QWJUtEVzEwQU&callback=initMap">
                   </script>
+                </div>
+                <div class="card-action light-blue lighten-5">
+                  Follower : <?php echo $num_follower; ?> Orang
+                  <?php
+                  error_reporting(0);
+                  if($user === null || $user == '' || $user == ""){
+                  ?>
+                  <a href="#modalLogin"><input type="submit" value="Ikuti Event" class="right waves-light btn"></a><hr>
+                  <?php }else{ ?>
+                    <form method="post" action="proses/proses_ikutiEvent.php">
+                  <input type="submit" value="Ikuti Event" class="right waves-light btn"><hr>
+                  <?php } ?>
+                    <input type="text" name="user" value="<?php echo $user; ?>" hidden="true">
+                    <input type="text" name="id_event" value="<?php echo $q; ?>" hidden="true">
+                      <?php
+                      if($num_follower>0){
+                        while ($row_follower = mysqli_fetch_array($result_follower)) {
+                          echo $row_follower[2].", ";
+                        }
+                      }else {
+                        echo "-";
+                      }
+                       ?>
+                  </form>
                 </div>
               </div>
             </div>

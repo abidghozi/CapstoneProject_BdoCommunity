@@ -7,6 +7,9 @@ if($role == 1){
 }else{
   $r = "User";
 }
+$query = "SELECT a.idKomentar,a.idArtikel,a.dataKomentar,b.jdlArtikel
+FROM data_komentar a JOIN data_artikel b ON a.idArtikel = b.idArtikel WHERE a.username = '$user'";
+$result = mysqli_query($conn,$query);
 ?>
 <html>
 <head>
@@ -70,46 +73,33 @@ if($role == 1){
                 <table class="teal lighten-5 highlight striped">
                   <thead>
                     <tr>
-                      <th>No</th>
                       <th>Artikel</th>
                       <th>Komentar</th>
                       <th></th>
                     </tr>
                   </thead>
-
                   <tbody>
+                    <?php
+                    if($result){
+                      while($row = mysqli_fetch_array($result)){
+                    ?>
                     <tr>
-                      <td>1</td>
-                      <td>Siapkan superbike 4 silinder, Ducati pragmatis</td>
-                      <td>itu desmosedici jejeran sama sepeda anak-anak, kesannya jadi gimana gituuu….</td>
-                      <td><a href="#">Hapus</a></td>
+                      <td><?php echo $row[3]; ?></td>
+                      <td><?php echo $row[2]; ?></td>
+                      <td><a href="../proses/proses_user.php?q=komentar&idk=<?php echo $row[0];?>&ida=<?php echo $row[1];?>">Hapus Komentar</a></td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>New Honda CB650F</td>
-                      <td>Soal harga gimana? Mesti saingan sama z900 yg “cuman” 225jt.. cc jauh lebih gede</td>
-                      <td><a href="#">Hapus</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Honda rebel siap dirilis</td>
-                      <td>Kalo ada yg 250cc nya bakal jadi best seller tuh..kereen</td>
-                      <td><a href="#">Hapus</a></td>
-                    </tr>
+                    <?php
+                      }
+                    }
+                    ?>
                   </tbody>
                 </table>
-
               </div>
             </div>
-
           </div>
-
-
         </div>
       </div>
-
     </div>
-
   </div>
 
 </body>

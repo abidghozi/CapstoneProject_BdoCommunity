@@ -44,6 +44,7 @@ $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
         <ul class="right hide-on-med-and-down">
           <li><a href="forum.php">Forum</a></li>
           <li><a href="event.php">Event</a></li>
+          <li><a href="chat.php">Chat</a></li>
           <?php
           if(isset($user)){
             if($role<3){

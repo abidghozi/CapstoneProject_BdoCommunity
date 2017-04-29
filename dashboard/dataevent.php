@@ -7,6 +7,9 @@ if($role == 1){
 }else{
   $r = "User";
 }
+$query = "SELECT a.id_follower,a.id_event,b.nama_event,b.tanggal_event
+FROM data_event_follower a JOIN data_event b ON a.id_event = b.id_event WHERE a.username = '$user'";
+$result = mysqli_query($conn,$query);
 ?>
 <html>
 <head>
@@ -70,46 +73,33 @@ if($role == 1){
                 <table class="teal lighten-5 highlight striped">
                   <thead>
                     <tr>
-                      <th>No</th>
                       <th>Event</th>
-                      <th>Lokasi, Tanggal</th>
+                      <th>Tanggal</th>
                       <th></th>
                     </tr>
                   </thead>
-
                   <tbody>
+                    <?php
+                    if($result){
+                      while($row = mysqli_fetch_array($result)){
+                    ?>
                     <tr>
-                      <td>1</td>
-                      <td>YCTA (Youth Collaboration Towards Action) 2017, Climate Change</td>
-                      <td>Jakarta, 12 Februari 2016</td>
-                      <td><a href="#">Keluar Event</a></td>
+                      <td><?php echo $row[2]; ?></td>
+                      <td><?php echo $row[3]; ?></td>
+                      <td><a href="../proses/proses_user.php?q=event&fl=<?php echo $row[0];?>&id=<?php echo $row[1];?>">Keluar Event</a></td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Workshop Kreatif, Make Your Own Flappybird with Diginusa</td>
-                      <td>Bandung, 21 Maret 2016</td>
-                      <td><a href="#">Keluar Event</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Pameran IKATeCUT 2017</td>
-                      <td>Jakarta, 9 September 2016</td>
-                      <td><a href="#">Keluar Event</a></td>
-                    </tr>
+                    <?php
+                      }
+                    }
+                    ?>
                   </tbody>
                 </table>
-
               </div>
             </div>
-
           </div>
-
-
         </div>
       </div>
-
     </div>
-
   </div>
 
 </body>

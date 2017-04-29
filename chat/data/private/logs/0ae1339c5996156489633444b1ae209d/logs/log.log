@@ -1,0 +1,23 @@
+ch_room1	29/04/2017	04:32:26		guest joins room1
+ch_room2	29/04/2017	04:36:45	guest	guest joins room2
+ch_Global	29/04/2017	04:37:01	guest	guest joins Global
+ch_Hobby	29/04/2017	04:37:37	guest	guest joins Hobby
+ch_room1	29/04/2017	04:38:14	guest	guest quit
+ch_room2	29/04/2017	04:38:16	guest	guest quit
+ch_Global	29/04/2017	04:38:18	guest	guest quit
+ch_Hobby	29/04/2017	04:38:19	guest	guest quit
+ch_Global	29/04/2017	04:38:22		guest joins Global
+ch_Hobby	29/04/2017	04:41:41	guest	guest joins Hobby
+ch_Hobby	29/04/2017	04:41:47	guest	guest quit
+ch_Global	29/04/2017	04:46:56	guest	guest changes nickname to admin
+ch_Global	29/04/2017	04:47:35	admin	admin changes nickname to abid
+ch_Global	29/04/2017	04:47:42	abid	hello
+ch_Global	29/04/2017	04:47:45	abid	test
+ch_Global	29/04/2017	04:50:19		anonim joins Global
+ch_Global	29/04/2017	04:50:28	anonim	Hello
+ch_Global	29/04/2017	04:52:59	abid	deneme
+ch_Global	29/04/2017	04:54:00	abid	abid changes nickname to admin
+ch_Global	29/04/2017	04:54:45	admin	test
+ch_Global	29/04/2017	04:55:51	anonim	Tesr
+ch_Global	29/04/2017	04:58:20	anonim	Test
+ch_Global	29/04/2017	04:59:08	admin	anonim quit (timeout)

@@ -9,7 +9,7 @@ if(isset($_SESSION['session_user'])){
   $query = "SELECT * FROM data_komunitas";
   $result = mysqli_query($conn, $query)or die(mysql_error($conn));
 }
-$query_artikel = "SELECT * FROM data_artikel WHERE statusArtikel = 'PUBLISHED' ORDER BY idArtikel DESC LIMIT 12";
+$query_artikel = "SELECT * FROM data_artikel WHERE statusArtikel = 'PUBLISHED' ORDER BY tglArtikel DESC LIMIT 12";
 $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
 ?>
 <html>
@@ -57,6 +57,7 @@ $result_artikel = mysqli_query($conn, $query_artikel)or die(mysql_error($conn));
     <a href="index.php" class="layout__tab">Home</a>
     <a href="#overview" class="layout__tab is-active">Forum</a>
     <a href="event.php" class="layout__tab">Event</a>
+    <a href="chat.php" class="layout__tab">Chat</a>
     <?php
     if(isset($user)){
       if($role<3){
